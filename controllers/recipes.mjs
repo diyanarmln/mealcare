@@ -1,6 +1,10 @@
 export default function initRecipesController(db) {
   const index = (request, response) => {
-    db.Recipe.findAll()
+    db.Recipe.findAll({
+      where: {
+        userId: 1,
+      },
+    })
       .then((recipes) => {
         response.send(recipes);
       })
