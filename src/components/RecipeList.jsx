@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function RecipeList() {
-  const [title, setTitle] = useState('');
-  const [servings, setServings] = useState();
-  const [instructions, setInstructions] = useState('');
+  const [recipes, setRecipes] = useState([]);
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
+  useEffect(() => { axios.get('/api/recipes')
+    .then((response) => {
+      setRecipes(response.data); }); }, []);
 
-  const handleServingsChange = (e) => {
-    setServings(e.target.value);
-  };
-
-  const handleInstructionsChange = (e) => {
-    setInstructions(e.target.value);
-  };
+  const recipesList = recipes.length === 0 ? <p>No Recipes Available</p> : recipes.map((recipe) => (
+    <li key={recipe.id}>
+      {recipe.title}
+      {recipe.servings}
+    </li>
+  ));
 
   return (
     <div>
@@ -25,6 +23,10 @@ export default function RecipeList() {
       <Link to="/new-recipe">
         <button type="button" className="btn btn-dark">Add +</button>
       </Link>
+      <ul>
+        {recipesList}
+      </ul>
+      <div />
     </div>
   );
 }
