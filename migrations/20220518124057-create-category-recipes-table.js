@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('category_recipes', {
@@ -34,7 +32,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('category_recipes');
-  }
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('category_recipes');
+  },
 };
