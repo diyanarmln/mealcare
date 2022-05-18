@@ -18,8 +18,8 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
       },
-      instructions: {
-        type: Sequelize.STRING,
+      recipe_instructions: {
+        type: Sequelize.TEXT,
       },
       servings: {
         type: Sequelize.INTEGER,
