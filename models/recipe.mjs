@@ -1,4 +1,4 @@
-export default function initUserModel(sequelize, DataTypes) {
+export default function initRecipeModel(sequelize, DataTypes) {
   return sequelize.define('recipe', {
     id: {
       allowNull: false,
