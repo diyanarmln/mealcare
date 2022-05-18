@@ -31,6 +31,7 @@ export default function initRecipesController(db) {
 
   const create = async (request, response) => {
     try {
+      const { category } = request.body;
       const newRecipe = {
         userId: 1,
         title: request.body.title,
@@ -40,7 +41,8 @@ export default function initRecipesController(db) {
         updatedAt: new Date(),
       };
       // run the DB INSERT query
-      await db.Recipe.create(newRecipe);
+      const recipe = await db.Recipe.create(newRecipe);
+      await recipe.addCategory(category);
 
       // create entry in join table
       // await recipe.addUser(user);
