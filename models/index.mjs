@@ -51,6 +51,38 @@ db.Category.belongsToMany(db.Recipe, { through: 'category_recipes' });
 db.Recipe.belongsToMany(db.Ingredient, { through: 'recipe_ingredients' });
 db.Ingredient.belongsToMany(db.Recipe, { through: 'recipe_ingredients' });
 
+// multiple foreign key columns referencing the same table
+
+db.Recipe.hasMany(db.Plan, {
+  as: 'breakfastMeal',
+  foreignKey: 'breakfast_recipe',
+});
+
+db.Recipe.hasMany(db.Plan, {
+  as: 'lunchMeal',
+  foreignKey: 'lunch_recipe',
+});
+
+db.Recipe.hasMany(db.Plan, {
+  as: 'dinnerMeal',
+  foreignKey: 'dinner_recipe',
+});
+
+db.Plan.belongsTo(db.Recipe, {
+  as: 'breakfast',
+  foreignKey: 'breakfast_recipe',
+});
+
+db.Plan.belongsTo(db.Recipe, {
+  as: 'lunch',
+  foreignKey: 'lunch_recipe',
+});
+
+db.Plan.belongsTo(db.Recipe, {
+  as: 'dinner',
+  foreignKey: 'dinner_recipe',
+});
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
