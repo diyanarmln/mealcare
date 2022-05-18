@@ -36,11 +36,11 @@ if (env === 'production') {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-db.User = initUserModel(sequelize, Sequelize.Datatypes);
-db.Recipe = initRecipeModel(sequelize, Sequelize.Datatypes);
-db.Category = initCategoryModel(sequelize, Sequelize.Datatypes);
-db.Ingredient = initIngredientModel(sequelize, Sequelize.Datatypes);
-db.Plan = initPlanModel(sequelize, Sequelize.Datatypes);
+db.User = initUserModel(sequelize, Sequelize.DataTypes);
+db.Recipe = initRecipeModel(sequelize, Sequelize.DataTypes);
+db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
+db.Ingredient = initIngredientModel(sequelize, Sequelize.DataTypes);
+db.Plan = initPlanModel(sequelize, Sequelize.DataTypes);
 
 db.Recipe.belongsTo(db.User);
 db.User.hasMany(db.Recipe);
