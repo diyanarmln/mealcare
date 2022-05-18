@@ -2,6 +2,12 @@ import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
 
+import initUserModel from './user.mjs';
+import initRecipeModel from './recipe.mjs';
+import initCategoryModel from './category.mjs';
+import initIngredientModel from './ingredient.mjs';
+import initPlanModel from './plan.mjs';
+
 const env = process.env.NODE_ENV || 'development';
 
 const config = allConfig[env];
@@ -29,6 +35,21 @@ if (env === 'production') {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+db.User = initUserModel(sequelize, Sequelize.Datatypes);
+db.Recipe = initRecipeModel(sequelize, Sequelize.Datatypes);
+db.Category = initCategoryModel(sequelize, Sequelize.Datatypes);
+db.Ingredient = initIngredientModel(sequelize, Sequelize.Datatypes);
+db.Plan = initPlanModel(sequelize, Sequelize.Datatypes);
+
+db.Recipe.belongsTo(db.User);
+db.User.hasMany(db.Recipe);
+
+db.Recipe.belongsToMany(db.Category, { through: 'category_recipes' });
+db.Category.belongsToMany(db.Recipe, { through: 'category_recipes' });
+
+db.Recipe.belongsToMany(db.Ingredient, { through: 'recipe_ingredients' });
+db.Ingredient.belongsToMany(db.Recipe, { through: 'recipe_ingredients' });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
