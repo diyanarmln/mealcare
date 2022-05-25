@@ -22,6 +22,9 @@ export default function initRecipesController(db) {
       where: {
         id: request.params.id,
       },
+      include: {
+        model: db.Category,
+      },
     })
       .then((recipe) => {
         response.send(recipe);
@@ -59,11 +62,12 @@ export default function initRecipesController(db) {
     const { id } = request.params;
     const recipe = await db.Recipe.findOne({ where: { id } });
 
+    const { category } = request.body;
+
     const updatedRecipe = {
       title: request.body.title,
       recipeInstructions: request.body.instructions,
       servings: request.body.servings,
-      createdAt: new Date(),
       updatedAt: new Date(),
     };
 
@@ -71,8 +75,8 @@ export default function initRecipesController(db) {
       // run the DB INSERT query
       await recipe.update(updatedRecipe);
 
-      // create entry in join table
-      // await recipe.addUser(user);
+      // update entry in join table
+      await recipe.setCategories([category]);
 
       response.send(
         { success: true },
