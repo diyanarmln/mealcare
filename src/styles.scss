@@ -4,5 +4,36 @@ body {
 .App {
   margin: 50px auto;
   // border: 5px solid black;
-  padding: 50px;
+  padding: 80px;
+}
+
+.nav-card {
+  width: 20rem;
+  height: 15rem;
+}
+
+.card-img {
+  opacity: 0.4;
+}
+
+.center-nav-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-nav {
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.center {
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.arrange-card-nav {
+  display: flex;
+  flex-direction: row;
 }
