@@ -35,7 +35,7 @@ export default function RecipeList() {
       Servings:
       {' '}
       {recipe.servings}
-      <Link to="/recipe" state={recipe.id}>
+      <Link to={{ pathname: `/recipe/${recipe.id}` }}>
         View
       </Link>
       <button type="button" className="btn btn-dark" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }}>–</button>
