@@ -6,11 +6,10 @@ export default function RecipeForm() {
   const params = useParams();
   const navigate = useNavigate();
 
-  // console.log('params', params.recipeId.length);
   const [title, setTitle] = useState('');
   const [servings, setServings] = useState();
   const [instructions, setInstructions] = useState('');
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState(1);
   const [successMessage, setSuccessMessage] = useState('');
 
   const getRecipe = () => {
@@ -50,13 +49,13 @@ export default function RecipeForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (params.recipeId.length > 0) {
+    if (params.recipeId !== undefined) {
       try {
         const { data } = await axios.put(`/api/recipe/${params.recipeId}/edit`, {
           title, servings, instructions, category,
         });
         if (data.success) {
-          setSuccessMessage('Recipe saved success!');
+          setSuccessMessage('Recipe updated successfully!');
           navigate(`/recipe/${params.recipeId}`);
         }
       } catch (err) {
@@ -68,8 +67,8 @@ export default function RecipeForm() {
           title, servings, instructions, category,
         });
         if (data.success) {
-          setSuccessMessage('Recipe saved success!');
-          // navigate(`/recipe/${newInvoice.id}`);
+          console.log('data', data);
+          navigate(`/recipe/${data.id}`);
         }
       } catch (err) {
         console.log(err.response.data);
