@@ -6,7 +6,7 @@ export default function RecipeForm() {
   const params = useParams();
   const navigate = useNavigate();
 
-  console.log('params', params.recipeId.length);
+  // console.log('params', params.recipeId.length);
   const [title, setTitle] = useState('');
   const [servings, setServings] = useState();
   const [instructions, setInstructions] = useState('');
@@ -27,7 +27,7 @@ export default function RecipeForm() {
     }
   };
 
-  if (params.recipeId.length > 0) {
+  if (params.recipeId !== undefined) {
     useEffect(() => { getRecipe(); }, []);
   }
   // photo hallo
