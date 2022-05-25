@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function RecipeForm() {
+export default function RecipeView() {
   const [recipe, setRecipe] = useState('');
 
   const location = useLocation();
@@ -39,7 +39,7 @@ export default function RecipeForm() {
 
       <br />
 
-      <Link to={{ pathname: '/recipe/edit', state: { recipeId: recipe.id } }}>
+      <Link to={{ pathname: `/recipe/edit/${recipe.id}`, state: { recipeId: recipe.id } }}>
         <button type="button" className="btn btn-dark">Edit</button>
       </Link>
       <Link to="/recipes">
