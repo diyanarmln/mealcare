@@ -24,7 +24,7 @@ export default function RecipeView() {
   console.log(recipe);
 
   return (
-    <div>
+    <div className="App">
       <h2>{recipe.title}</h2>
       <p>
         Category:

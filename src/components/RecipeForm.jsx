@@ -77,7 +77,7 @@ export default function RecipeForm() {
   };
 
   return (
-    <div>
+    <div className="App">
       <h2>Add a recipe</h2>
       <form>
 

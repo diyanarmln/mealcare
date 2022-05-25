@@ -43,7 +43,7 @@ export default function RecipeList() {
   ));
 
   return (
-    <div>
+    <div className="App">
       <h2>Your Recipes</h2>
       <p>View, Add and Edit your recipes</p>
       <Link to="/new-recipe">

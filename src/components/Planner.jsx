@@ -3,7 +3,7 @@ import * as React from 'react';
 
 export default function Planner() {
   return (
-    <div>
+    <div className="App">
       <h2>Your Meal Plan</h2>
       <p>View and update your meal plan</p>
     </div>
