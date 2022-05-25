@@ -1,33 +1,36 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function RecipeView() {
   const [recipe, setRecipe] = useState('');
+  const [category, setCategory] = useState('');
   const params = useParams();
   const { recipeId } = params;
-
-  const location = useLocation();
-  const id = location.state;
-  console.log(id);
-
   const getRecipe = () => {
     try {
       axios.get(`/api/recipe/${recipeId}`)
         .then((response) => {
-          setRecipe(response.data); });
+          setRecipe(response.data);
+          // eslint-disable-next-line no-unused-expressions
+          response.data.categories.length === 0 ? setCategory('null') : setCategory(response.data.categories[0].name);
+        });
     } catch (err) {
       console.log(err.response.data);
     }
   };
 
   useEffect(() => { getRecipe(); }, []);
-
   console.log(recipe);
 
   return (
     <div>
       <h2>{recipe.title}</h2>
+      <p>
+        Category:
+        {' '}
+        {category}
+      </p>
       <p>
         Servings:
         {' '}
