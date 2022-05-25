@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 export default function RecipeView() {
   const [recipe, setRecipe] = useState('');
+  const params = useParams();
+  const { recipeId } = params;
 
   const location = useLocation();
   const id = location.state;
@@ -11,7 +13,7 @@ export default function RecipeView() {
 
   const getRecipe = () => {
     try {
-      axios.get(`/api/recipe/${id}`)
+      axios.get(`/api/recipe/${recipeId}`)
         .then((response) => {
           setRecipe(response.data); });
     } catch (err) {
@@ -39,7 +41,7 @@ export default function RecipeView() {
 
       <br />
 
-      <Link to={{ pathname: `/recipe/edit/${recipe.id}`, state: { recipeId: recipe.id } }}>
+      <Link to={{ pathname: `/recipe/edit/${recipeId}`, state: { recipeId } }}>
         <button type="button" className="btn btn-dark">Edit</button>
       </Link>
       <Link to="/recipes">
