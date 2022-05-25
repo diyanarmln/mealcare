@@ -1,16 +1,17 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 export default function RecipeForm() {
   const params = useParams();
+  const navigate = useNavigate();
+
   console.log('params', params.recipeId.length);
   const [title, setTitle] = useState('');
   const [servings, setServings] = useState();
   const [instructions, setInstructions] = useState('');
   const [category, setCategory] = useState();
   const [successMessage, setSuccessMessage] = useState('');
-  // let recipeData = {};
 
   const getRecipe = () => {
     try {
@@ -56,6 +57,7 @@ export default function RecipeForm() {
         });
         if (data.success) {
           setSuccessMessage('Recipe saved success!');
+          navigate(`/recipe/${params.recipeId}`);
         }
       } catch (err) {
         console.log(err.response.data);
@@ -67,10 +69,7 @@ export default function RecipeForm() {
         });
         if (data.success) {
           setSuccessMessage('Recipe saved success!');
-          setTitle('');
-          setServings('');
-          setInstructions('');
-          setCategory(0);
+          // navigate(`/recipe/${newInvoice.id}`);
         }
       } catch (err) {
         console.log(err.response.data);
