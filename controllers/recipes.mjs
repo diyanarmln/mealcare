@@ -51,7 +51,10 @@ export default function initRecipesController(db) {
       // await recipe.addUser(user);
 
       response.send(
-        { success: true },
+        {
+          success: true,
+          id: recipe.dataValues.id,
+        },
       );
     } catch (error) {
       response.status(500).send(error);
