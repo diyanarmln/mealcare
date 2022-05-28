@@ -14,6 +14,7 @@ export default function initRecipesController(db) {
       response.send(recipeArr);
     } catch (err) {
       response.status(500).send(err);
+      console.log(err);
     }
   };
 
@@ -92,9 +93,14 @@ export default function initRecipesController(db) {
   const remove = async (request, response) => {
     try {
       const { id } = request.params;
-      const recipe = await db.Recipe.findOne({ where: { id } });
-      // TODO: error dealing
-      recipe.destroy();
+      const recipe = await db.Recipe.findOne({
+        where: {
+          id,
+        },
+      });
+      // Un-associate all previously associated bars
+      await recipe.setCategories([]);
+      await recipe.destroy();
       response.send({ success: true });
     } catch (err) {
       response.status(500).send(err);
