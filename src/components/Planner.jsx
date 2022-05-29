@@ -55,13 +55,13 @@ export default function Planner() {
         <div className="day-btn">S</div>
       </div>
 
-      <h3>Breakfast</h3>
+      <h4>Breakfast</h4>
       <Select options={breakfastRecipes} />
       <br />
-      <h3>Lunch</h3>
+      <h4>Lunch</h4>
       <Select options={lunchRecipes} />
       <br />
-      <h3>Dinner</h3>
+      <h4>Dinner</h4>
       <Select options={dinnerRecipes} />
 
     </div>
