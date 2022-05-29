@@ -106,3 +106,14 @@ p {
   margin: auto 12px;
   color: #acb992;
 }
+
+.day-btn {
+  padding: 5px 20px;
+  background-color: #acb992;
+}
+
+.week-layout {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
