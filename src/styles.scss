@@ -1,10 +1,23 @@
 body {
-  background-color: white;
+  background-color: #e9e5d6;
 }
 .App {
   margin: 20px auto;
   // border: 5px solid black;
   padding: 50px;
+}
+
+h2,
+p {
+  color: #362706;
+}
+
+.main-btn {
+  background-color: #464e2e;
+}
+
+.secondary-btn {
+  background-color: #acb992;
 }
 
 .nav-card {
@@ -73,6 +86,7 @@ body {
 
 .label-margin {
   margin-right: 10px;
+  background-color: #acb992;
 }
 
 .textarea-height {
@@ -86,4 +100,9 @@ body {
 .list-subtitle {
   color: grey;
   font-style: italic;
+}
+
+.delete-btn {
+  margin: auto 12px;
+  color: #acb992;
 }
