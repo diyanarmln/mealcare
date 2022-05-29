@@ -9,7 +9,7 @@ export default function initRecipesController(db) {
           model: db.Category,
         },
       });
-      console.log(recipes);
+      // console.log(recipes);
       // const recipeArr = recipes.map((el) => ({
       //   id: el.id,
       //   title: el.title,
@@ -19,7 +19,7 @@ export default function initRecipesController(db) {
       response.send(recipes);
     } catch (err) {
       response.status(500).send(err);
-      console.log(err);
+      // console.log(err);
     }
   };
 
