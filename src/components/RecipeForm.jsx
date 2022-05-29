@@ -121,7 +121,7 @@ export default function RecipeForm() {
         </div>
         <br />
         <div>
-          <button type="submit" className="btn btn-dark label-margin" onClick={handleSubmit}>Save</button>
+          <button type="submit" className="btn btn-dark label-margin main-btn" onClick={handleSubmit}>Save</button>
         </div>
 
       </form>
