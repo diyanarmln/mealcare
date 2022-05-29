@@ -20,13 +20,13 @@ export default function Planner() {
       </div>
 
       <div className="week-layout">
-        <div className="day-btn">M</div>
-        <div className="day-btn">T</div>
-        <div className="day-btn">W</div>
-        <div className="day-btn">T</div>
-        <div className="day-btn">F</div>
-        <div className="day-btn">S</div>
-        <div className="day-btn">S</div>
+        <div id="1" className="day-btn">M</div>
+        <div id="2" className="day-btn">T</div>
+        <div id="3" className="day-btn">W</div>
+        <div id="4" className="day-btn">T</div>
+        <div id="5" className="day-btn">F</div>
+        <div id="6" className="day-btn">S</div>
+        <div id="7" className="day-btn">S</div>
       </div>
 
       <PlannerForm />
