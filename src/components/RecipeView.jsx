@@ -34,8 +34,8 @@ export default function RecipeView() {
         </h2>
         <h5>
           {' '}
-          <span className="badge bg-dark label-margin">{category}</span>
-          <span className="badge bg-secondary label-margin">
+          <span className="badge label-margin">{category}</span>
+          <span className="badge label-margin">
             Serves
             {' '}
             {recipe.servings}
@@ -52,7 +52,7 @@ export default function RecipeView() {
       <br />
 
       <Link to={{ pathname: `/recipe/edit/${recipeId}`, state: { recipeId } }} className="label-margin">
-        <button type="button" className="btn btn-dark">Edit</button>
+        <button type="button" className="btn btn-dark main-btn">Edit</button>
       </Link>
 
     </div>
