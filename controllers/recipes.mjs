@@ -5,13 +5,18 @@ export default function initRecipesController(db) {
         where: {
           userId: 3,
         },
+        include: {
+          model: db.Category,
+        },
       });
-      const recipeArr = recipes.map((el) => ({
-        id: el.id,
-        title: el.title,
-        servings: el.servings,
-      }));
-      response.send(recipeArr);
+      console.log(recipes);
+      // const recipeArr = recipes.map((el) => ({
+      //   id: el.id,
+      //   title: el.title,
+      //   servings: el.servings,
+      //   // category: el.categories[0].name,
+      // }));
+      response.send(recipes);
     } catch (err) {
       response.status(500).send(err);
       console.log(err);
@@ -29,6 +34,7 @@ export default function initRecipesController(db) {
     })
       .then((recipe) => {
         response.send(recipe);
+        console.log(recipe);
       })
       .catch((error) => console.log(error));
   };
