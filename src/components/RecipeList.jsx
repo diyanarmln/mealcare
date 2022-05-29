@@ -43,7 +43,7 @@ export default function RecipeList() {
       </Link>
 
       <div>
-        <button type="button" className="btn btn-light" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }}>–</button>
+        <i className="fa fa-minus delete-btn" aria-hidden="true" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }} />
       </div>
     </li>
   ));
@@ -62,7 +62,7 @@ export default function RecipeList() {
         </div>
         <div>
           <Link to="/new-recipe">
-            <button type="button" className="btn btn-dark">+</button>
+            <button type="button" className="btn btn-dark main-btn">+</button>
           </Link>
         </div>
       </div>
