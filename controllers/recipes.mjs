@@ -3,7 +3,7 @@ export default function initRecipesController(db) {
     try {
       const recipes = await db.Recipe.findAll({
         where: {
-          userId: 1,
+          userId: 3,
         },
       });
       const recipeArr = recipes.map((el) => ({
@@ -37,8 +37,8 @@ export default function initRecipesController(db) {
     try {
       const { category } = request.body;
       const newRecipe = {
-        userId: 1,
-        title: request.body.title,
+        userId: 3,
+        title: request.body.title.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()),
         recipeInstructions: request.body.instructions,
         servings: request.body.servings,
         createdAt: new Date(),
@@ -46,7 +46,7 @@ export default function initRecipesController(db) {
       };
       // run the DB INSERT query
       const recipe = await db.Recipe.create(newRecipe);
-      await recipe.addCategory(category);
+      await recipe.addCategory(category.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()));
 
       // create entry in join table
       // await recipe.addUser(user);
@@ -59,6 +59,7 @@ export default function initRecipesController(db) {
       );
     } catch (error) {
       response.status(500).send(error);
+      console.log(error);
     }
   };
 
@@ -69,7 +70,7 @@ export default function initRecipesController(db) {
     const { category } = request.body;
 
     const updatedRecipe = {
-      title: request.body.title,
+      title: request.body.title.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()),
       recipeInstructions: request.body.instructions,
       servings: request.body.servings,
       updatedAt: new Date(),
@@ -80,13 +81,14 @@ export default function initRecipesController(db) {
       await recipe.update(updatedRecipe);
 
       // update entry in join table
-      await recipe.setCategories([category]);
+      await recipe.setCategories([category.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())]);
 
       response.send(
         { success: true },
       );
     } catch (error) {
       response.status(500).send(error);
+      console.log(error);
     }
   };
 
