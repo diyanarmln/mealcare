@@ -2,17 +2,17 @@ module.exports = {
   up: async (queryInterface) => {
     const categories = [
       {
-        name: 'breakfast',
+        name: 'Breakfast',
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        name: 'lunch',
+        name: 'Lunch',
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        name: 'dinner',
+        name: 'Dinner',
         created_at: new Date(),
         updated_at: new Date(),
       },
