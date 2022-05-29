@@ -25,17 +25,21 @@ export default function RecipeView() {
 
   return (
     <div className="App">
-      <h2>{recipe.title}</h2>
-      <p>
-        Category:
-        {' '}
-        {category}
-      </p>
-      <p>
-        Servings:
-        {' '}
-        {recipe.servings}
-      </p>
+      <div className="page-title">
+        <h2>
+          {recipe.title}
+        </h2>
+        <h5>
+          {' '}
+          <span className="badge bg-dark label-margin">{category}</span>
+          <span className="badge bg-secondary label-margin">
+            serves
+            {' '}
+            {recipe.servings}
+          </span>
+        </h5>
+      </div>
+
       <p>
         Instructions:
         {' '}
@@ -44,7 +48,7 @@ export default function RecipeView() {
 
       <br />
 
-      <Link to={{ pathname: `/recipe/edit/${recipeId}`, state: { recipeId } }}>
+      <Link to={{ pathname: `/recipe/edit/${recipeId}`, state: { recipeId } }} className="label-margin">
         <button type="button" className="btn btn-dark">Edit</button>
       </Link>
       <Link to="/recipes">

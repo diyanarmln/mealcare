@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
@@ -78,53 +79,42 @@ export default function RecipeForm() {
 
   return (
     <div className="App">
-      <h2>Add a recipe</h2>
+      <h2 className="page-title">Add new recipe</h2>
       <form>
 
-        <div className="form-group">
-          <label htmlFor="title">
-            Title:
-            <input id="title" value={title} type="text" className="form-control" onChange={handleTitleChange} />
-          </label>
+        <div className="form-floating mb-3">
+          <input type="title" className="form-control" id="title" placeholder="Name your recipe" />
+          <label htmlFor="title">Recipe Title</label>
         </div>
 
-        <br />
-
-        <div className="form-group">
-          <label htmlFor="servings">
-            Servings:
-            <input id="servings" value={servings} type="number" className="form-control" onChange={handleServingsChange} />
-          </label>
+        <div className="form-floating mb-3">
+          <input type="servings" className="form-control" id="servings" placeholder="Number of servings" />
+          <label htmlFor="title">Servings</label>
         </div>
 
+        <div className="form-floating">
+          <select className="form-select" id="category" onChange={handleCategoryChange} value={category} aria-label="Floating label select category">
+            <option selected>Select recipe category</option>
+            <option value="1">Breakfast</option>
+            <option value="2">Lunch</option>
+            <option value="3">Dinner</option>
+          </select>
+          <label htmlFor="category">Recipe Category</label>
+        </div>
         <br />
 
-        <div className="form-group">
-          <label htmlFor="category">
-            Category:
-            <select id="category" className="form-select" onChange={handleCategoryChange} value={category}>
-              <option value="1">Breakfast</option>
-              <option value="2">Lunch</option>
-              <option value="3">Dinner</option>
-            </select>
-          </label>
+        <div className="form-floating">
+          <textarea className="form-control" placeholder="Enter the recipe instructions" id="instructions" value={instructions} onChange={handleInstructionsChange} style={{ height: '300px' }} />
+          <label htmlFor="instructions">Instructions</label>
+        </div>
+        <br />
+        <div>
+          <button type="submit" className="btn btn-dark label-margin" onClick={handleSubmit}>Save</button>
+          <Link to="/recipes">
+            <button type="button" className="btn btn-outline-secondary">Back</button>
+          </Link>
         </div>
 
-        <br />
-
-        <div className="form-group">
-          <label htmlFor="instructions">
-            Instructions:
-            <textarea id="instructions" value={instructions} type="text" className="form-control" onChange={handleInstructionsChange} />
-          </label>
-        </div>
-
-        <br />
-
-        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Save</button>
-        <Link to="/recipes">
-          <button type="button" className="btn btn-outline-secondary">Back</button>
-        </Link>
       </form>
       {successMessage}
     </div>

@@ -29,27 +29,35 @@ export default function RecipeList() {
   };
 
   const recipesList = recipes.length === 0 ? <p>No Recipes Available</p> : recipes.map((recipe) => (
-    <li key={recipe.id}>
-      {recipe.title}
-      <br />
-      Servings:
-      {' '}
-      {recipe.servings}
-      <Link to={{ pathname: `/recipe/${recipe.id}` }}>
-        View
+    <li key={recipe.id} className="recipe-list">
+      <Link to={{ pathname: `/recipe/${recipe.id}` }} className="recipe-title">
+        {recipe.title}
+        <br />
+        serves
+        {' '}
+        {recipe.servings}
       </Link>
-      <button type="button" className="btn btn-dark" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }}>–</button>
+
+      <div>
+        <button type="button" className="btn btn-dark" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }}>–</button>
+      </div>
     </li>
   ));
 
   return (
     <div className="App">
-      <h2>Your Recipes</h2>
-      <p>View, Add and Edit your recipes</p>
-      <Link to="/new-recipe">
-        <button type="button" className="btn btn-dark">Add +</button>
-      </Link>
-      <ul>
+      <div className="recipe-header">
+        <div>
+          <h2>Your Recipes</h2>
+          <p>View, Add and Edit your recipes</p>
+        </div>
+        <div>
+          <Link to="/new-recipe">
+            <button type="button" className="btn btn-dark">+</button>
+          </Link>
+        </div>
+      </div>
+      <ul className="list-style">
         {recipesList}
       </ul>
       <div />
