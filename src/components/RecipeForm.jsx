@@ -10,7 +10,7 @@ export default function RecipeForm() {
   const [title, setTitle] = useState('');
   const [servings, setServings] = useState();
   const [instructions, setInstructions] = useState('');
-  const [category, setCategory] = useState(1);
+  const [category, setCategory] = useState();
   const [successMessage, setSuccessMessage] = useState('');
 
   const getRecipe = () => {
@@ -77,24 +77,36 @@ export default function RecipeForm() {
     }
   };
 
+  const backLink = () => {
+    if (params.recipeId !== undefined) {
+      return `/recipe/${params.recipeId}`;
+    }
+    return '/recipes';
+  };
+
   return (
     <div className="App">
-      <h2 className="page-title">Add new recipe</h2>
+      <h2 className="page-title">
+        <Link to={backLink()} className="recipe-title">
+          <i className="fa fa-chevron-left" style={{ 'margin-right': '10px' }} aria-hidden="true" />
+        </Link>
+        Add new recipe
+      </h2>
       <form>
 
         <div className="form-floating mb-3">
-          <input type="title" className="form-control" id="title" placeholder="Name your recipe" />
+          <input type="title" className="form-control" id="title" placeholder="Name your recipe" onChange={handleTitleChange} value={title} />
           <label htmlFor="title">Recipe Title</label>
         </div>
 
         <div className="form-floating mb-3">
-          <input type="servings" className="form-control" id="servings" placeholder="Number of servings" />
+          <input type="servings" className="form-control" id="servings" placeholder="Number of servings" onChange={handleServingsChange} value={servings} />
           <label htmlFor="title">Servings</label>
         </div>
 
         <div className="form-floating">
-          <select className="form-select" id="category" onChange={handleCategoryChange} value={category} aria-label="Floating label select category">
-            <option selected>Select recipe category</option>
+          <select className="form-select" id="category" onChange={handleCategoryChange} defaultValue="" value={category} aria-label="Floating label select category">
+            <option value="" disabled>Choose a category ...</option>
             <option value="1">Breakfast</option>
             <option value="2">Lunch</option>
             <option value="3">Dinner</option>
@@ -110,9 +122,6 @@ export default function RecipeForm() {
         <br />
         <div>
           <button type="submit" className="btn btn-dark label-margin" onClick={handleSubmit}>Save</button>
-          <Link to="/recipes">
-            <button type="button" className="btn btn-outline-secondary">Back</button>
-          </Link>
         </div>
 
       </form>

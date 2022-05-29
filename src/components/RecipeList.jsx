@@ -31,15 +31,19 @@ export default function RecipeList() {
   const recipesList = recipes.length === 0 ? <p>No Recipes Available</p> : recipes.map((recipe) => (
     <li key={recipe.id} className="recipe-list">
       <Link to={{ pathname: `/recipe/${recipe.id}` }} className="recipe-title">
-        {recipe.title}
+        <span className="list-title">
+          {recipe.title}
+        </span>
         <br />
-        serves
-        {' '}
-        {recipe.servings}
+        <span className="list-subtitle">
+          serves
+          {' '}
+          {recipe.servings}
+        </span>
       </Link>
 
       <div>
-        <button type="button" className="btn btn-dark" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }}>–</button>
+        <button type="button" className="btn btn-light" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }}>–</button>
       </div>
     </li>
   ));
@@ -48,7 +52,12 @@ export default function RecipeList() {
     <div className="App">
       <div className="recipe-header">
         <div>
-          <h2>Your Recipes</h2>
+          <h2>
+            <Link to="/" className="recipe-title">
+              <i className="fa fa-chevron-left" style={{ 'margin-right': '10px' }} aria-hidden="true" />
+            </Link>
+            Your Recipes
+          </h2>
           <p>View, Add and Edit your recipes</p>
         </div>
         <div>
