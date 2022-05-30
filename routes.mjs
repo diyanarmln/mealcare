@@ -14,6 +14,7 @@ export default function routes(app) {
   app.get('/api/recipe/:id', recipesController.show);
   app.delete('/api/recipe/:id', recipesController.remove);
   app.get('/api/plan/:plannerId', plansController.show);
+  app.put('/api/plan/:plannerId', plansController.update);
 
   app.get('/*', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));
