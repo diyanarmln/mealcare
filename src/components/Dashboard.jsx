@@ -1,10 +1,21 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const handleLogOut = async (e) => {
+    e.preventDefault();
+    await axios.delete('/api/logout');
+    navigate('/login');
+  };
+
   return (
     <div className="App">
-      <h2>Hi Diyana</h2>
+      <div className="log-out-btn">
+        <h2>Hi Sam</h2>
+        <i className="fa fa-sign-out fa-2x" aria-hidden="true" onClick={handleLogOut} />
+      </div>
       <p>Welcome back!</p>
       <div className="arrange-card-nav">
         <div className="center">

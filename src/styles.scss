@@ -24,6 +24,10 @@ p {
   color: #362706;
 }
 
+.card-bg {
+  background-color: #464e2e !important;
+}
+
 .main-btn {
   background-color: #464e2e;
 }
@@ -147,4 +151,29 @@ p {
 
 .view-page-title {
   margin-bottom: 30px;
+}
+
+.login-text {
+  color: #e9e5d6 !important;
+  padding-bottom: 30px;
+}
+
+.login-labels {
+  margin-top: 3px;
+}
+
+.login-btn {
+  margin-top: -40px;
+  background-color: #e9e5d6;
+  color: #464e2e;
+}
+
+.login-color-light {
+  color: #e9e5d6 !important;
+}
+
+.log-out-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
