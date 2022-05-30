@@ -8,6 +8,15 @@ body {
   max-width: 480px;
 }
 
+li {
+  display: list-item;
+  list-style-type: circle;
+}
+
+li::marker {
+  content: initial;
+}
+
 h2,
 h3,
 h4,
