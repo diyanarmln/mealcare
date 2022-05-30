@@ -17,6 +17,9 @@ export default function initRecipeModel(sequelize, DataTypes) {
     title: {
       type: DataTypes.STRING,
     },
+    recipeIngredients: {
+      type: DataTypes.TEXT,
+    },
     recipeInstructions: {
       type: DataTypes.TEXT,
     },
