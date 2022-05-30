@@ -171,3 +171,9 @@ p {
 .login-color-light {
   color: #e9e5d6 !important;
 }
+
+.log-out-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
