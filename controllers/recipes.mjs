@@ -52,7 +52,7 @@ export default function initRecipesController(db) {
       };
       // run the DB INSERT query
       const recipe = await db.Recipe.create(newRecipe);
-      await recipe.addCategory(category.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()));
+      await recipe.addCategory(category);
 
       // create entry in join table
       // await recipe.addUser(user);
@@ -87,7 +87,7 @@ export default function initRecipesController(db) {
       await recipe.update(updatedRecipe);
 
       // update entry in join table
-      await recipe.setCategories([category.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())]);
+      await recipe.setCategories([category]);
 
       response.send(
         { success: true },
