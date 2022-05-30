@@ -108,33 +108,33 @@ export default function PlannerForm() {
   };
 
   return (
-    <div>
+    <div className="App">
       <div>
         <Planner />
       </div>
-      <h4>Breakfast</h4>
-      <Select
-        options={breakfastRecipes}
-        onChange={handleBreakfastOnChange}
-        value={breakfastRecipes[breakfastMeal]}
-      />
-      <br />
-      <h4>Lunch</h4>
-      <Select
-        options={lunchRecipes}
-        onChange={handleLunchOnChange}
-        value={lunchRecipes[lunchMeal]}
-
-      />
-      <br />
-      <h4>Dinner</h4>
-      <Select
-        options={dinnerRecipes}
-        onChange={handleDinnerOnChange}
-        value={dinnerRecipes[dinnerMeal]}
-
-      />
-      <br />
+      <div>
+        <h4>Breakfast</h4>
+        <Select
+          options={breakfastRecipes}
+          onChange={handleBreakfastOnChange}
+          value={breakfastRecipes[breakfastMeal]}
+        />
+        <br />
+        <h4>Lunch</h4>
+        <Select
+          options={lunchRecipes}
+          onChange={handleLunchOnChange}
+          value={lunchRecipes[lunchMeal]}
+        />
+        <br />
+        <h4>Dinner</h4>
+        <Select
+          options={dinnerRecipes}
+          onChange={handleDinnerOnChange}
+          value={dinnerRecipes[dinnerMeal]}
+        />
+        <br />
+      </div>
     </div>
   );
 }
