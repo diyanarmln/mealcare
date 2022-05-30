@@ -6,7 +6,7 @@ export default function Planner() {
     <div>
       <div className="page-title">
         <h2>
-          <Link to="/" className="recipe-title">
+          <Link to="/home" className="recipe-title">
             <i className="fa fa-chevron-left" style={{ marginRight: '10px' }} aria-hidden="true" />
           </Link>
           Your Meal Plan
