@@ -4,7 +4,6 @@ import Dashboard from './components/Dashboard.jsx';
 import RecipeList from './components/RecipeList.jsx';
 import RecipeForm from './components/RecipeForm.jsx';
 import RecipeView from './components/RecipeView.jsx';
-import Planner from './components/Planner.jsx';
 import PlannerForm from './components/PlannerForm.jsx';
 
 export default function App() {
