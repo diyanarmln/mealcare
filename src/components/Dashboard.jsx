@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 export default function Dashboard() {
   return (
     <div className="App">
-      <h2>Hi Diyana</h2>
+      <div>
+        <h2>Hi Sam</h2>
+        <i className="fa fa-sign-out fa-2x" aria-hidden="true" />
+      </div>
       <p>Welcome back!</p>
       <div className="arrange-card-nav">
         <div className="center">
