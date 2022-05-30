@@ -6,6 +6,10 @@ export default function initPlanModel(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
+    dayOfWeek: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     breakfastRecipe: {
       type: DataTypes.INTEGER,
       references: {
