@@ -6,7 +6,6 @@ import Planner from './Planner.jsx';
 
 export default function PlannerForm() {
   const params = useParams();
-
   const location = useLocation();
 
   // OPTION LIST
@@ -24,6 +23,7 @@ export default function PlannerForm() {
     await axios.get('/api/recipes')
       .then((response) => {
         const recipeList = response.data;
+        console.log(recipeList);
         // eslint-disable-next-line no-return-assign
         const breakfast = recipeList.filter((obj) => obj.categories[0].id === 1);
         // eslint-disable-next-line max-len
