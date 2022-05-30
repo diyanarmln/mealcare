@@ -24,7 +24,7 @@ export default function RecipeView() {
 
   return (
     <div className="App">
-      <div className="page-title">
+      <div className="view-page-title">
         <h2>
           <Link to="/recipes" className="recipe-title">
             <i className="fa fa-chevron-left" style={{ marginRight: '10px' }} aria-hidden="true" />
