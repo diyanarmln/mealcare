@@ -1,5 +1,5 @@
 import jsSHA from 'jssha';
-import { resolve } from 'path';
+// import { resolve } from 'path';
 
 export default function initUsersController(db) {
   const login = async (req, res) => {
@@ -10,19 +10,24 @@ export default function initUsersController(db) {
         },
       });
       console.log('user password', user.password);
+      if (!user) {
+        res.status(401).send('Wrong username or password');
+        return;
+      }
 
       // eslint-disable-next-line new-cap
       const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
       shaObj.update(req.body.passwordInput);
       const hashedPassword = shaObj.getHash('HEX');
 
-      if (hashedPassword === user.password) {
-        res.cookie('loggedIn', true);
-        res.cookie('userId', user.id);
-        res.sendFile(resolve('dist', 'main.html'));
-      } else {
-        res.send('you need to log in');
+      if (user.password !== hashedPassword) {
+        res.status(401).send('Wrong username or password');
+        return;
       }
+
+      res.cookie('loggedIn', true);
+      res.cookie('userId', user.id);
+      res.send({ login: true });
     }
     catch (error) {
       console.log(error);
