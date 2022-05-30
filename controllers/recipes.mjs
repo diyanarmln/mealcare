@@ -9,17 +9,10 @@ export default function initRecipesController(db) {
           model: db.Category,
         },
       });
-      // console.log(recipes);
-      // const recipeArr = recipes.map((el) => ({
-      //   id: el.id,
-      //   title: el.title,
-      //   servings: el.servings,
-      //   // category: el.categories[0].name,
-      // }));
       response.send(recipes);
     } catch (err) {
       response.status(500).send(err);
-      // console.log(err);
+      console.log(err);
     }
   };
 
@@ -106,12 +99,29 @@ export default function initRecipesController(db) {
           id,
         },
       });
-      // Un-associate all previously associated bars
+
+      await db.Plan.update(
+        { breakfastRecipe: null, updatedAt: new Date() },
+        { where: { breakfastRecipe: id } },
+      );
+
+      await db.Plan.update(
+        { lunchRecipe: null, updatedAt: new Date() },
+        { where: { lunchRecipe: id } },
+      );
+
+      await db.Plan.update(
+        { dinnerRecipe: null, updatedAt: new Date() },
+        { where: { dinnerRecipe: id } },
+      );
+
+      // Un-associate all previously associated
       await recipe.setCategories([]);
       await recipe.destroy();
       response.send({ success: true });
     } catch (err) {
       response.status(500).send(err);
+      console.log(err);
     }
   };
 
