@@ -15,7 +15,7 @@ export default function App() {
         <Route path="/new-recipe" element={<RecipeForm />} />
         <Route path="/recipe/:recipeId" element={<RecipeView />} />
         <Route path="/recipe/edit/:recipeId" element={<RecipeForm />} />
-        <Route path="/planner/:plannerId" element={<PlannerForm />} />
+        <Route path="/planner/:plannerId" element={<PlannerForm key={window.location.pathname} />} />
 
       </Routes>
     </BrowserRouter>

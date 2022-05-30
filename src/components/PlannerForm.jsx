@@ -8,6 +8,9 @@ export default function PlannerForm() {
   const params = useParams();
   const location = useLocation();
 
+  // const [path, setPath] = useState(location);
+  // setPath(useLocation());
+
   // OPTION LIST
   const [breakfastRecipes, setBreakfastRecipes] = useState([]);
   const [lunchRecipes, setLunchRecipes] = useState([]);
@@ -44,6 +47,9 @@ export default function PlannerForm() {
 
   const getSavedMeals = async () => {
     console.log('3 running planner');
+    // setBreakfastMeal(null);
+    // setLunchMeal(null);
+    // setDinnerMeal(null);
     await axios.get(`/api/plan/${params.plannerId}`)
       .then((planResponse) => {
         const breakfastId = planResponse.data.breakfastRecipe;
@@ -56,17 +62,31 @@ export default function PlannerForm() {
         // eslint-disable-next-line max-len
         const dinnerOptionIndex = dinnerRecipes.findIndex((option) => option.value === dinnerId);
 
-        setBreakfastMeal(breakfastOptionIndex);
-        setLunchMeal(lunchOptionIndex);
-        setDinnerMeal(dinnerOptionIndex);
+        if (breakfastOptionIndex === -1) {
+          setBreakfastMeal(null);
+        } else {
+          setBreakfastMeal(breakfastRecipes[breakfastOptionIndex]);
+        }
+
+        if (lunchOptionIndex === -1) {
+          setLunchMeal(null);
+        } else {
+          setLunchMeal(lunchRecipes[lunchOptionIndex]);
+        }
+
+        if (dinnerOptionIndex === -1) {
+          setDinnerMeal(null);
+        } else {
+          setDinnerMeal(dinnerRecipes[dinnerOptionIndex]);
+        }
       });
   };
 
   useEffect(() => {
     getRecipes();
-  }, [location]);
+  }, []);
 
-  useEffect(() => { getSavedMeals(); }, [breakfastRecipes, lunchRecipes, dinnerRecipes]);
+  useEffect(() => { getSavedMeals(); }, [location, breakfastRecipes, lunchRecipes, dinnerRecipes]);
 
   const handleBreakfastOnChange = async (e) => {
     try {
@@ -75,9 +95,10 @@ export default function PlannerForm() {
       const { data } = await axios.put(`/api/plan/${params.plannerId}`, { breakfastMealInput });
       if (data.success) {
         console.log('Breakfast meal plan saved successfully');
+        await getSavedMeals();
       }
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
     }
   };
 
@@ -88,9 +109,10 @@ export default function PlannerForm() {
       const { data } = await axios.put(`/api/plan/${params.plannerId}`, { lunchMealInput });
       if (data.success) {
         console.log('Lunch meal plan saved successfully');
+        await getSavedMeals();
       }
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
     }
   };
 
@@ -101,11 +123,14 @@ export default function PlannerForm() {
       const { data } = await axios.put(`/api/plan/${params.plannerId}`, { dinnerMealInput });
       if (data.success) {
         console.log('Dinner meal plan saved successfully');
+        await getSavedMeals();
       }
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
     }
   };
+
+  console.log(dinnerMeal);
 
   return (
     <div className="App">
@@ -117,21 +142,21 @@ export default function PlannerForm() {
         <Select
           options={breakfastRecipes}
           onChange={handleBreakfastOnChange}
-          value={breakfastRecipes[breakfastMeal]}
+          value={breakfastMeal}
         />
         <br />
         <h4>Lunch</h4>
         <Select
           options={lunchRecipes}
           onChange={handleLunchOnChange}
-          value={lunchRecipes[lunchMeal]}
+          value={lunchMeal}
         />
         <br />
         <h4>Dinner</h4>
         <Select
           options={dinnerRecipes}
           onChange={handleDinnerOnChange}
-          value={dinnerRecipes[dinnerMeal]}
+          value={dinnerMeal}
         />
         <br />
       </div>
