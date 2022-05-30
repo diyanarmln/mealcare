@@ -7,6 +7,7 @@ import Planner from './Planner.jsx';
 export default function PlannerForm() {
   const params = useParams();
   const location = useLocation();
+  const [dayOfTheWeek, setDayOfTheWeek] = useState('');
 
   // const [path, setPath] = useState(location);
   // setPath(useLocation());
@@ -20,6 +21,27 @@ export default function PlannerForm() {
   const [breakfastMeal, setBreakfastMeal] = useState(null);
   const [lunchMeal, setLunchMeal] = useState(null);
   const [dinnerMeal, setDinnerMeal] = useState(null);
+
+  const getDayOfTheWeek = () => {
+    console.log('watch here', params.plannerId);
+    const condition = params.plannerId;
+
+    if (condition === 1) {
+      setDayOfTheWeek('Monday');
+    } if (condition === 2) {
+      setDayOfTheWeek('Tuesday');
+    } if (condition === 3) {
+      setDayOfTheWeek('Wednesday');
+    } if (condition === 4) {
+      setDayOfTheWeek('Thursday');
+    } if (condition === 5) {
+      setDayOfTheWeek('Friday');
+    } if (condition === 6) {
+      setDayOfTheWeek('Saturday');
+    } if (condition === 7) {
+      setDayOfTheWeek('Sunday');
+    }
+  };
 
   const getRecipes = async () => {
     console.log('1 running recipes');
@@ -47,9 +69,8 @@ export default function PlannerForm() {
 
   const getSavedMeals = async () => {
     console.log('3 running planner');
-    // setBreakfastMeal(null);
-    // setLunchMeal(null);
-    // setDinnerMeal(null);
+    getDayOfTheWeek();
+    console.log(dayOfTheWeek);
     await axios.get(`/api/plan/${params.plannerId}`)
       .then((planResponse) => {
         const breakfastId = planResponse.data.breakfastRecipe;
@@ -130,7 +151,7 @@ export default function PlannerForm() {
     }
   };
 
-  console.log(dinnerMeal);
+  console.log(dayOfTheWeek);
 
   return (
     <div className="App">
@@ -138,6 +159,12 @@ export default function PlannerForm() {
         <Planner />
       </div>
       <div>
+        {/* <p>
+          Day of the Week:
+          {' '}
+          {dayOfTheWeek}
+        </p>
+        <br /> */}
         <h4>Breakfast</h4>
         <Select
           options={breakfastRecipes}
