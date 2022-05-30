@@ -1,12 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-// import * as React from 'react';
-// import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Planner() {
   return (
-    <div className="App">
+    <div>
       <div className="page-title">
         <h2>
           <Link to="/" className="recipe-title">
