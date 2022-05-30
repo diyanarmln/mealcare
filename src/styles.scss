@@ -5,6 +5,7 @@ body {
   margin: 20px auto;
   // border: 5px solid black;
   padding: 50px;
+  max-width: 480px;
 }
 
 h2,
@@ -16,6 +17,11 @@ p {
 
 .main-btn {
   background-color: #464e2e;
+}
+
+.main-btn:hover {
+  color: #acb992;
+  cursor: pointer;
 }
 
 .secondary-btn {
@@ -73,7 +79,7 @@ p {
 }
 
 .recipe-title:hover {
-  color: #0d6efd;
+  color: #acb992;
   cursor: pointer;
 }
 
@@ -109,13 +115,27 @@ p {
   color: #acb992;
 }
 
+.delete-btn:hover {
+  color: #464e2e;
+  cursor: pointer;
+}
+
 .day-btn {
-  padding: 5px 20px;
+  padding: 5px 17px;
   background-color: #acb992;
+}
+
+.day-btn:focus {
+  border-style: inset;
+  border-color: #464e2e;
 }
 
 .week-layout {
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
+}
+
+.view-page-title {
+  margin-bottom: 30px;
 }
