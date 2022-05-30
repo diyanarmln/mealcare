@@ -61,6 +61,7 @@
     "method-override": "^3.0.0",
     "pg": "^8.5.1",
     "react-router-dom": "^6.3.0",
+    "react-select": "^5.3.2",
     "sequelize": "^6.3.5",
     "styled-components": "^5.3.5"
   }

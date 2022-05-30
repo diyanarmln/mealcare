@@ -7,6 +7,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      day_of_week: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       breakfast_recipe: {
         type: Sequelize.INTEGER,
         references: {

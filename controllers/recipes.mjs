@@ -5,16 +5,21 @@ export default function initRecipesController(db) {
         where: {
           userId: 3,
         },
+        include: {
+          model: db.Category,
+        },
       });
-      const recipeArr = recipes.map((el) => ({
-        id: el.id,
-        title: el.title,
-        servings: el.servings,
-      }));
-      response.send(recipeArr);
+      // console.log(recipes);
+      // const recipeArr = recipes.map((el) => ({
+      //   id: el.id,
+      //   title: el.title,
+      //   servings: el.servings,
+      //   // category: el.categories[0].name,
+      // }));
+      response.send(recipes);
     } catch (err) {
       response.status(500).send(err);
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -29,6 +34,7 @@ export default function initRecipesController(db) {
     })
       .then((recipe) => {
         response.send(recipe);
+        console.log(recipe);
       })
       .catch((error) => console.log(error));
   };
@@ -46,7 +52,7 @@ export default function initRecipesController(db) {
       };
       // run the DB INSERT query
       const recipe = await db.Recipe.create(newRecipe);
-      await recipe.addCategory(category.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()));
+      await recipe.addCategory(category);
 
       // create entry in join table
       // await recipe.addUser(user);
@@ -81,7 +87,7 @@ export default function initRecipesController(db) {
       await recipe.update(updatedRecipe);
 
       // update entry in join table
-      await recipe.setCategories([category.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())]);
+      await recipe.setCategories([category]);
 
       response.send(
         { success: true },

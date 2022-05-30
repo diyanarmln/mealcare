@@ -21,14 +21,13 @@ export default function RecipeView() {
   };
 
   useEffect(() => { getRecipe(); }, []);
-  console.log(recipe);
 
   return (
     <div className="App">
       <div className="page-title">
         <h2>
           <Link to="/recipes" className="recipe-title">
-            <i className="fa fa-chevron-left" style={{ 'margin-right': '10px' }} aria-hidden="true" />
+            <i className="fa fa-chevron-left" style={{ marginRight: '10px' }} aria-hidden="true" />
           </Link>
           {recipe.title}
         </h2>
@@ -42,11 +41,12 @@ export default function RecipeView() {
           </span>
         </h5>
       </div>
-
-      <p>
-        Instructions:
-        {' '}
-        {recipe.recipeInstructions}
+      <p style={{ whiteSpace: 'pre-line' }}>
+        <p style={{ fontWeight: 'bold' }}>Instructions</p>
+        <p>
+          {' '}
+          {recipe.recipeInstructions}
+        </p>
       </p>
 
       <br />
