@@ -15,12 +15,9 @@ export default function RecipeList() {
   useEffect(() => { getRecipes(); }, []);
 
   const handleDelete = async (recipeId) => {
-    // e.preventDefault();
     try {
       const { data } = await axios.delete(`/api/recipe/${recipeId}`);
-      console.log(data);
       if (data.success) {
-        // useEffect(() => { getRecipes(); }, []);
         getRecipes();
       }
     } catch (err) {
@@ -54,7 +51,7 @@ export default function RecipeList() {
         <div>
           <h2>
             <Link to="/" className="recipe-title">
-              <i className="fa fa-chevron-left" style={{ 'margin-right': '10px' }} aria-hidden="true" />
+              <i className="fa fa-chevron-left" style={{ marginRight: '10px' }} aria-hidden="true" />
             </Link>
             Your Recipes
           </h2>
