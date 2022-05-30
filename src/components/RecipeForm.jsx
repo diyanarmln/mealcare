@@ -94,7 +94,7 @@ export default function RecipeForm() {
     <div className="App">
       <h2 className="page-title">
         <Link to={backLink()} className="recipe-title">
-          <i className="fa fa-chevron-left" style={{ 'margin-right': '10px' }} aria-hidden="true" />
+          <i className="fa fa-chevron-left" style={{ marginRight: '10px' }} aria-hidden="true" />
         </Link>
         Add new recipe
       </h2>
