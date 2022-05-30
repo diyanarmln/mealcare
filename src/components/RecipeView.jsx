@@ -5,13 +5,21 @@ import { Link, useParams } from 'react-router-dom';
 export default function RecipeView() {
   const [recipe, setRecipe] = useState('');
   const [category, setCategory] = useState('');
+  const [ingredients, setIngredients] = useState([]);
+  const [instructions, setInstructions] = useState([]);
+
   const params = useParams();
   const { recipeId } = params;
+
   const getRecipe = () => {
     try {
       axios.get(`/api/recipe/${recipeId}`)
         .then((response) => {
           setRecipe(response.data);
+          const ingredientsArr = response.data.recipeIngredients;
+          setIngredients(ingredientsArr.split('\n'));
+          const instructionsArr = response.data.recipeInstructions;
+          setInstructions(instructionsArr.split('\n'));
           // eslint-disable-next-line no-unused-expressions
           response.data.categories.length === 0 ? setCategory('null') : setCategory(response.data.categories[0].name);
         });
@@ -21,10 +29,25 @@ export default function RecipeView() {
   };
 
   useEffect(() => { getRecipe(); }, []);
+  console.log(ingredients);
+
+  const ingredientsList = ingredients.map((ingredient, index) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <li key={`ingredient-${index}`}>
+      {ingredient}
+    </li>
+  ));
+
+  const instructionsList = instructions.map((instruction, index) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <li key={`instruction-${index}`}>
+      {instruction}
+    </li>
+  ));
 
   return (
     <div className="App">
-      <div className="page-title">
+      <div className="view-page-title">
         <h2>
           <Link to="/recipes" className="recipe-title">
             <i className="fa fa-chevron-left" style={{ marginRight: '10px' }} aria-hidden="true" />
@@ -41,20 +64,18 @@ export default function RecipeView() {
           </span>
         </h5>
       </div>
-      <p style={{ whiteSpace: 'pre-line' }}>
-        <p style={{ fontWeight: 'bold' }}>Ingredients</p>
-        <p>
-          {' '}
-          {recipe.recipeIngredients}
-        </p>
-      </p>
-      <p style={{ whiteSpace: 'pre-line' }}>
-        <p style={{ fontWeight: 'bold' }}>Instructions</p>
-        <p>
-          {' '}
-          {recipe.recipeInstructions}
-        </p>
-      </p>
+      <p style={{ fontWeight: 'bold' }}>Ingredients</p>
+
+      <ul>
+        {' '}
+        {ingredientsList}
+      </ul>
+
+      <p style={{ fontWeight: 'bold' }}>Instructions</p>
+      <ol type="1">
+        {' '}
+        {instructionsList}
+      </ol>
 
       <br />
 
