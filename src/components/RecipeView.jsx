@@ -42,6 +42,13 @@ export default function RecipeView() {
         </h5>
       </div>
       <p style={{ whiteSpace: 'pre-line' }}>
+        <p style={{ fontWeight: 'bold' }}>Ingredients</p>
+        <p>
+          {' '}
+          {recipe.recipeIngredients}
+        </p>
+      </p>
+      <p style={{ whiteSpace: 'pre-line' }}>
         <p style={{ fontWeight: 'bold' }}>Instructions</p>
         <p>
           {' '}

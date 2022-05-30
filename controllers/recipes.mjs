@@ -3,7 +3,7 @@ export default function initRecipesController(db) {
     try {
       const recipes = await db.Recipe.findAll({
         where: {
-          userId: 3,
+          userId: 1,
         },
         include: {
           model: db.Category,
@@ -36,8 +36,9 @@ export default function initRecipesController(db) {
     try {
       const { category } = request.body;
       const newRecipe = {
-        userId: 3,
+        userId: 1,
         title: request.body.title.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()),
+        recipeIngredients: request.body.ingredients,
         recipeInstructions: request.body.instructions,
         servings: request.body.servings,
         createdAt: new Date(),
@@ -70,6 +71,7 @@ export default function initRecipesController(db) {
 
     const updatedRecipe = {
       title: request.body.title.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase()),
+      recipeIngredients: request.body.ingredients,
       recipeInstructions: request.body.instructions,
       servings: request.body.servings,
       updatedAt: new Date(),

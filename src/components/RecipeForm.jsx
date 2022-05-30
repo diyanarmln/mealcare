@@ -11,6 +11,7 @@ export default function RecipeForm() {
   const [servings, setServings] = useState();
   const [instructions, setInstructions] = useState('');
   const [category, setCategory] = useState();
+  const [ingredients, setIngredients] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
   const getRecipe = () => {
@@ -20,6 +21,7 @@ export default function RecipeForm() {
           setTitle(response.data.title);
           setServings(response.data.servings);
           setInstructions(response.data.recipeInstructions);
+          setIngredients(response.data.recipeIngredients);
           setCategory(response.data.categories[0].id);
           console.log(response.data); });
     } catch (err) {
@@ -48,12 +50,16 @@ export default function RecipeForm() {
     setCategory(e.target.value);
   };
 
+  const handleIngredientsChange = (e) => {
+    setIngredients(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (params.recipeId !== undefined) {
       try {
         const { data } = await axios.put(`/api/recipe/${params.recipeId}/edit`, {
-          title, servings, instructions, category,
+          title, servings, ingredients, instructions, category,
         });
         if (data.success) {
           setSuccessMessage('Recipe updated successfully!');
@@ -65,7 +71,7 @@ export default function RecipeForm() {
     } else {
       try {
         const { data } = await axios.post('/api/recipes', {
-          title, servings, instructions, category,
+          title, servings, ingredients, instructions, category,
         });
         if (data.success) {
           console.log('data', data);
@@ -112,6 +118,12 @@ export default function RecipeForm() {
             <option value="3">Dinner</option>
           </select>
           <label htmlFor="category">Recipe Category</label>
+        </div>
+        <br />
+
+        <div className="form-floating">
+          <textarea className="form-control" placeholder="Enter the recipe ingredients" id="ingredients" value={ingredients} onChange={handleIngredientsChange} style={{ height: '300px' }} />
+          <label htmlFor="ingredients">Ingredients</label>
         </div>
         <br />
 
