@@ -19,6 +19,11 @@ export default function routes(app) {
   app.put('/api/plan/:plannerId', plansController.update);
   app.get('/api/user', usersController.dashboard);
   app.post('/api/login', usersController.login);
+  app.delete('/api/logout', (_, res) => {
+    res.clearCookie('userId');
+    res.cookie('loggedIn', false);
+    res.send({});
+  });
 
   app.get('/*', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));
