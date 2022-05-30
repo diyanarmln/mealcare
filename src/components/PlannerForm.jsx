@@ -1,38 +1,27 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import Select from 'react-select';
+import Planner from './Planner.jsx';
 
 export default function PlannerForm() {
   const params = useParams();
 
+  const location = useLocation();
+
+  // OPTION LIST
   const [breakfastRecipes, setBreakfastRecipes] = useState([]);
   const [lunchRecipes, setLunchRecipes] = useState([]);
   const [dinnerRecipes, setDinnerRecipes] = useState([]);
 
-  // const [hasPlan, setHasPlan] = useState(false);
+  // SELECT DEFAULT VALUE
+  const [breakfastMeal, setBreakfastMeal] = useState(null);
+  const [lunchMeal, setLunchMeal] = useState(null);
+  const [dinnerMeal, setDinnerMeal] = useState(null);
 
-  const [breakfastMeal, setBreakfastMeal] = useState('');
-  const [lunchMeal, setLunchMeal] = useState('');
-  const [dinnerMeal, setDinnerMeal] = useState('');
-
-  console.log(params.plannerId);
-
-  // const getPlan = () => {
-  //   axios.get(`/api/plan/${params.plannerId}`)
-  //     .then((response) => {
-  //       console.log(response.data.length);
-  //       if (response.data.length !== undefined) {
-  //         setHasPlan(true);
-  //       }
-  //     });
-  // };
-
-  // useEffect(() => { getPlan(); }, []);
-  // console.log(hasPlan);
-
-  const getRecipes = () => {
-    axios.get('/api/recipes')
+  const getRecipes = async () => {
+    console.log('1 running recipes');
+    await axios.get('/api/recipes')
       .then((response) => {
         const recipeList = response.data;
         // eslint-disable-next-line no-return-assign
@@ -49,14 +38,35 @@ export default function PlannerForm() {
         // eslint-disable-next-line max-len
         const dinnerOptions = dinner.map((recipe) => ({ label: recipe.title, value: recipe.id }));
         setDinnerRecipes(dinnerOptions);
+        console.log('2 finished handling recipe response ');
       });
   };
-  useEffect(() => { getRecipes(); }, []);
-  console.log(breakfastRecipes);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // };
+  const getSavedMeals = async () => {
+    console.log('3 running planner');
+    await axios.get(`/api/plan/${params.plannerId}`)
+      .then((planResponse) => {
+        const breakfastId = planResponse.data.breakfastRecipe;
+        const lunchId = planResponse.data.lunchRecipe;
+        const dinnerId = planResponse.data.dinnerRecipe;
+        // eslint-disable-next-line max-len
+        const breakfastOptionIndex = breakfastRecipes.findIndex((option) => option.value === breakfastId);
+        // eslint-disable-next-line max-len
+        const lunchOptionIndex = lunchRecipes.findIndex((option) => option.value === lunchId);
+        // eslint-disable-next-line max-len
+        const dinnerOptionIndex = dinnerRecipes.findIndex((option) => option.value === dinnerId);
+
+        setBreakfastMeal(breakfastOptionIndex);
+        setLunchMeal(lunchOptionIndex);
+        setDinnerMeal(dinnerOptionIndex);
+      });
+  };
+
+  useEffect(() => {
+    getRecipes();
+  }, [location]);
+
+  useEffect(() => { getSavedMeals(); }, [breakfastRecipes, lunchRecipes, dinnerRecipes]);
 
   const handleBreakfastOnChange = async (e) => {
     try {
@@ -99,22 +109,30 @@ export default function PlannerForm() {
 
   return (
     <div>
+      <div>
+        <Planner />
+      </div>
       <h4>Breakfast</h4>
       <Select
         options={breakfastRecipes}
         onChange={handleBreakfastOnChange}
+        value={breakfastRecipes[breakfastMeal]}
       />
       <br />
       <h4>Lunch</h4>
       <Select
         options={lunchRecipes}
         onChange={handleLunchOnChange}
+        value={lunchRecipes[lunchMeal]}
+
       />
       <br />
       <h4>Dinner</h4>
       <Select
         options={dinnerRecipes}
         onChange={handleDinnerOnChange}
+        value={dinnerRecipes[dinnerMeal]}
+
       />
       <br />
       {/* <div>
