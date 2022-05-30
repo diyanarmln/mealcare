@@ -54,9 +54,9 @@ export default function PlannerForm() {
   useEffect(() => { getRecipes(); }, []);
   console.log(breakfastRecipes);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   const handleBreakfastOnChange = async (e) => {
     try {
