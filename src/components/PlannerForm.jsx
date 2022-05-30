@@ -54,6 +54,10 @@ export default function PlannerForm() {
 
   useEffect(() => { getRecipes(); }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       <h4>Breakfast</h4>
@@ -79,6 +83,10 @@ export default function PlannerForm() {
           setDinnerMeal(e.value);
         }}
       />
+      <br />
+      <div>
+        <button type="submit" className="btn btn-dark main-btn" onClick={handleSubmit}>Save</button>
+      </div>
     </div>
   );
 }
