@@ -135,9 +135,6 @@ export default function PlannerForm() {
 
       />
       <br />
-      {/* <div>
-        <button type="submit" className="btn btn-dark main-btn" onClick={handleSubmit}>Save</button>
-      </div> */}
     </div>
   );
 }
