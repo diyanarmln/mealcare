@@ -12,7 +12,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/home" element={<Dashboard />} />
         <Route path="/recipes" element={<RecipeList />} />
         <Route path="/new-recipe" element={<RecipeForm />} />
         <Route path="/recipe/:recipeId" element={<RecipeView />} />
