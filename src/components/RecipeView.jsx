@@ -65,6 +65,7 @@ export default function RecipeView() {
           </span>
         </h5>
       </div>
+      {/* why inline styles if we have bootstrap? :) */}
       <p style={{ fontWeight: 'bold' }}>Ingredients</p>
 
       <ul>
