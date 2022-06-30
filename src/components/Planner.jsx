@@ -15,6 +15,7 @@ export default function Planner() {
       </div>
 
       <div className="week-layout">
+        {/* I never like hardcoded ids like that. Maybe we could rethink this a bit and make it a string instead of a number then, representing the days */}
         <Link to={{ pathname: '/planner/1' }} className="">
           <button type="button" id="1" className="day-btn">M</button>
         </Link>

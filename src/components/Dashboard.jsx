@@ -7,6 +7,7 @@ export default function Dashboard() {
   const handleLogOut = async (e) => {
     e.preventDefault();
     await axios.delete('/api/logout');
+    // what if the deletion fails? Still redirect? Maybe can add some possible failing scenario here and render some error message
     navigate('/login');
   };
 

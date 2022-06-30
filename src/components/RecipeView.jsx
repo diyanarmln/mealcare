@@ -9,6 +9,7 @@ export default function RecipeView() {
   const [instructions, setInstructions] = useState([]);
 
   const params = useParams();
+  // hah! here you actually destructured, nice!
   const { recipeId } = params;
 
   const getRecipe = () => {
@@ -64,6 +65,7 @@ export default function RecipeView() {
           </span>
         </h5>
       </div>
+      {/* why inline styles if we have bootstrap? :) */}
       <p style={{ fontWeight: 'bold' }}>Ingredients</p>
 
       <ul>
@@ -79,6 +81,7 @@ export default function RecipeView() {
 
       <br />
 
+      {/* nice use of state, that is useful within React Router. Not sure if we need it though, if we have the recipeId in the path already? hmmm */}
       <Link to={{ pathname: `/recipe/edit/${recipeId}`, state: { recipeId } }} className="label-margin">
         <button type="button" className="btn btn-dark main-btn">Edit</button>
       </Link>

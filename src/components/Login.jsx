@@ -26,6 +26,9 @@ export default function Login() {
     }
   };
 
+  // I think you don't need a named function here
+  // onChange={(e) => setEmailInput(e.target.value)}
+  // anonymous function works the same way, just without having a name :)
   const handleEmailChange = (e) => {
     setEmailInput(e.target.value);
   };

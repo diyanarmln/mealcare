@@ -18,20 +18,29 @@ export default function RecipeForm() {
     try {
       axios.get(`/api/recipe/${params.recipeId}`)
         .then((response) => {
+          // destructuring would be so much nicer to read
           setTitle(response.data.title);
           setServings(response.data.servings);
           setInstructions(response.data.recipeInstructions);
           setIngredients(response.data.recipeIngredients);
           setCategory(response.data.categories[0].id);
+          // no console.logs in production :)
           console.log(response.data); });
     } catch (err) {
       console.log(err.response.data);
     }
   };
 
+  // we should never run hooks conditionally. You could place that if clause however within the effect
+  /**
+   useEffect(function getRecipesById(){
+    if (params.recipeId) getRecipe();
+   }, []) 
+   */
   if (params.recipeId !== undefined) {
     useEffect(() => { getRecipe(); }, []);
   }
+  // hi, want to remove comments? :)
   // photo hallo
 
   const handleTitleChange = (e) => {
