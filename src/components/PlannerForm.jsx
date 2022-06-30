@@ -5,6 +5,8 @@ import Select from 'react-select';
 import Planner from './Planner.jsx';
 
 export default function PlannerForm() {
+  // could destructure here, to not references params all the time
+  // const { plannerId } = useParams();
   const params = useParams();
   const location = useLocation();
   const [dayOfTheWeek, setDayOfTheWeek] = useState('');
@@ -26,6 +28,21 @@ export default function PlannerForm() {
     console.log('watch here', params.plannerId);
     const condition = params.plannerId;
 
+    // my eyes hurt, let me give you a nicer pattern
+    // define a day object outside of this component
+    /* 
+      const daysByNumber = {
+        1: 'Monday',
+        2: 'Tuesday',
+        ...
+      }
+
+      Then you reference it like so in this function:
+      const { plannerId } = params;
+      if (!plannerId) return;
+      setDayOfTheWeek(daysByNumber[plannerId]);
+    */
+    
     if (condition === 1) {
       setDayOfTheWeek('Monday');
     } if (condition === 2) {
@@ -47,6 +64,7 @@ export default function PlannerForm() {
     console.log('1 running recipes');
     await axios.get('/api/recipes')
       .then((response) => {
+        // What if data is undefined? Then all your array methods could possible throw errors or just set everything to empty arrays at least.
         const recipeList = response.data;
         console.log(recipeList);
         // eslint-disable-next-line no-return-assign
@@ -73,6 +91,7 @@ export default function PlannerForm() {
     console.log(dayOfTheWeek);
     await axios.get(`/api/plan/${params.plannerId}`)
       .then((planResponse) => {
+        // we should also account for the scenario that these variables could be undefined. Referencing keys within objects can always lead to bugs real quick if we dont account for it
         const breakfastId = planResponse.data.breakfastRecipe;
         const lunchId = planResponse.data.lunchRecipe;
         const dinnerId = planResponse.data.dinnerRecipe;
@@ -83,6 +102,13 @@ export default function PlannerForm() {
         // eslint-disable-next-line max-len
         const dinnerOptionIndex = dinnerRecipes.findIndex((option) => option.value === dinnerId);
 
+        // I think we could create one function, that accepts the recipe and the set state function as parameter, and then run that function three times.
+        /* const updateMeal = (recipe, state, setState) => {
+            ... find index
+            ... -1 or not
+            ... set state
+        }
+        */
         if (breakfastOptionIndex === -1) {
           setBreakfastMeal(null);
         } else {
@@ -114,6 +140,7 @@ export default function PlannerForm() {
       setBreakfastMeal(e.value);
       const breakfastMealInput = e.value;
       const { data } = await axios.put(`/api/plan/${params.plannerId}`, { breakfastMealInput });
+      // this is what I am talking about earlier
       if (data.success) {
         console.log('Breakfast meal plan saved successfully');
         await getSavedMeals();

@@ -9,6 +9,7 @@ import Login from './components/Login.jsx';
 
 export default function App() {
   return (
+    // noice thats how one should use router
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -18,7 +19,6 @@ export default function App() {
         <Route path="/recipe/:recipeId" element={<RecipeView />} />
         <Route path="/recipe/edit/:recipeId" element={<RecipeForm />} />
         <Route path="/planner/:plannerId" element={<PlannerForm key={window.location.pathname} />} />
-
       </Routes>
     </BrowserRouter>
   );

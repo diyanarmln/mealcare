@@ -11,7 +11,7 @@ export default function RecipeList() {
       .then((response) => {
         setRecipes(response.data); });
   };
-
+  // since you are getting all recipes in multiple places in your app, it might be worth considering fetching all the recipes in your top-level component and storing them there and then distributing the recipes to your other components. with Context or Redux that should be even easier.
   useEffect(() => { getRecipes(); }, []);
 
   const handleDelete = async (recipeId) => {
@@ -40,6 +40,7 @@ export default function RecipeList() {
       </Link>
 
       <div>
+        {/* Haha nice solutin with the window.confirm! We could also think of a nicer UI by using a modal! */}
         <i className="fa fa-minus delete-btn" aria-hidden="true" onClick={(e) => { if (window.confirm('Delete the item?')) { e.preventDefault(); handleDelete(recipe.id); } }} />
       </div>
     </li>
